@@ -27,3 +27,17 @@ func TrueFF(fs []func(), okf func() bool) (ok bool) {
 	ok, _ = BLnSrch(ib, len(fs))
 	return
 }
+
+type KFunc struct {
+	Key  string
+	Func func()
+}
+
+func ExecF(kf []KFunc, key string) (ok bool) {
+	ib := func(i int) bool { return kf[i].Key == key }
+	ok, n := BLnSrch(ib, len(kf))
+	if ok {
+		kf[n].Func()
+	}
+	return
+}
