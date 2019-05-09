@@ -24,7 +24,8 @@ func TrueFF(fs []func(), okf func() bool) (ok bool) {
 		b = !okf()
 		return
 	}
-	ok, _ = BLnSrch(ib, len(fs))
+	foundFalse, _ := BLnSrch(ib, len(fs))
+	ok = !foundFalse
 	return
 }
 
