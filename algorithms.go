@@ -7,6 +7,7 @@ func Forall(inf func(int), n int) {
 }
 
 // BLnSrch is the Bounded Linear Search algorithm
+// https://www.cs.utexas.edu/users/EWD/transcriptions/EWD09xx/EWD930.html
 func BLnSrch(ib func(int) bool, n int) (ok bool, i int) {
 	i = 0
 	for i != n && !ib(i) {
