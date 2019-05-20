@@ -43,3 +43,11 @@ func ExecF(kf []KFunc, key string) (ok bool) {
 	}
 	return
 }
+
+func RunConcurr(fe []func() error) (e error) {
+	ec := make(chan error)
+	f := func(i int) { go func() { ec <- fe[i]() }() }
+	Forall(f, len(fe))
+	e = <-ec
+	return
+}
