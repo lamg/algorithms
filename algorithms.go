@@ -53,10 +53,19 @@ func RunConcurrent(fe []func() error) (e error) {
 }
 
 func Max(a, b int) (c int) {
-	if a < b {
+	if b > a {
 		c = b
 	} else {
 		c = a
+	}
+	return
+}
+
+func Min(a, b int) (c int) {
+	if a < b {
+		c = a
+	} else {
+		c = b
 	}
 	return
 }

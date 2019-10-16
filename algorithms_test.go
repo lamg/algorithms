@@ -44,7 +44,7 @@ func TestExecF(t *testing.T) {
 	require.True(t, v)
 }
 
-func TestRunConcurr(t *testing.T) {
+func TestRunConcurrent(t *testing.T) {
 	end := "end"
 	fe := []func() error{
 		func() (e error) {
@@ -54,6 +54,6 @@ func TestRunConcurr(t *testing.T) {
 		},
 		func() error { return fmt.Errorf(end) },
 	}
-	e := RunConcurr(fe)
+	e := RunConcurrent(fe)
 	require.Equal(t, end, e.Error())
 }
