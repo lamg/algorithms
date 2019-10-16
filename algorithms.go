@@ -51,3 +51,9 @@ func RunConcurr(fe []func() error) (e error) {
 	e = <-ec
 	return
 }
+
+func Reverse(fi func(int), n int) {
+	for i := 0; i != n; i++ {
+		fi(n - i - 1)
+	}
+}
