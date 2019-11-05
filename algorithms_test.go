@@ -2,13 +2,14 @@ package algorithms
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/require"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
-func TestBLnSrch(t *testing.T) {
+func TestBLS(t *testing.T) {
 	ns := []int{3, 2, 1, 0}
-	ok, n := BLnSrch(
+	ok, n := BLS(
 		func(i int) bool { return ns[i]%2 == 0 },
 		len(ns),
 	)
@@ -56,4 +57,23 @@ func TestRunConcurrent(t *testing.T) {
 	}
 	e := RunConcurrent(fe)
 	require.Equal(t, end, e.Error())
+}
+
+func TestMax(t *testing.T) {
+	m, n := Max(0, 0), Max(-1, 1)
+	require.Equal(t, 0, m)
+	require.Equal(t, 1, n)
+}
+
+func TestMin(t *testing.T) {
+	m, n := Min(0, 0), Min(-1, 1)
+	require.Equal(t, 0, m)
+	require.Equal(t, -1, n)
+}
+
+func TestReverse(t *testing.T) {
+	s, n := make([]int, 10), 0
+	f := func(i int) { s[n], n = i, n+1 }
+	Reverse(f, len(s))
+	require.Equal(t, []int{9, 8, 7, 6, 5, 4, 3, 2, 1, 0}, s)
 }
