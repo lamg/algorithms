@@ -36,6 +36,6 @@ func TestInsert(t *testing.T) {
 		for _, k := range j.xs {
 			Insert(a, k)
 		}
-		require.Equal(t, a, j.expected, "At %d", i)
+		require.Equal(t, j.expected, a, "At %d", i)
 	}
 }
