@@ -73,7 +73,6 @@ func TestBInsert(t *testing.T) {
 		for _, k := range j.xs {
 			b.Insert(k)
 		}
-		t.Logf("%v", b.Nodes)
 		require.Equal(t, j.expected, b, "At %d", i)
 	}
 }
