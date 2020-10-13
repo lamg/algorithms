@@ -62,3 +62,25 @@ func (b *BTree) Insert(v int) {
 	current.Right = uint(len(b.Nodes)) + 1
 	b.Nodes = append(b.Nodes, BNode{Empty: true}, BNode{Empty: true})
 }
+
+func (b *BTree) Remove(v int) (ok bool) {
+	current := &b.Nodes[0]
+	for !current.Empty && current.Value != v {
+		if v < current.Value {
+			current = &b.Nodes[current.Left]
+		} else if v > current.Value {
+			current = &b.Nodes[current.Right]
+		}
+	}
+	ok = current.Value == v
+	if ok {
+		left, previous := current, current
+		for !left.Empty {
+			previous = left
+			left = &b.Nodes[left.Left]
+		}
+		current.Value = previous.Value
+		previous.Empty = true
+	}
+	return
+}

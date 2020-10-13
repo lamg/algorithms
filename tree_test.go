@@ -76,3 +76,80 @@ func TestBInsert(t *testing.T) {
 		require.Equal(t, j.expected, b, "At %d", i)
 	}
 }
+
+func TestRemoveB(t *testing.T) {
+	ts := []struct {
+		initial *BTree
+		value   int
+		removed *BTree
+		ok      bool
+	}{
+		{
+			initial: &BTree{
+				Nodes: []BNode{
+					{Value: 8, Left: 1, Right: 2},
+					{Empty: true},
+					{Empty: true},
+				},
+			},
+			value: 8,
+			removed: &BTree{
+				Nodes: []BNode{
+					{Value: 8, Left: 1, Right: 2, Empty: true},
+					{Empty: true},
+					{Empty: true},
+				},
+			},
+			ok: true,
+		},
+		{
+			initial: &BTree{
+				Nodes: []BNode{
+					{Value: 8, Left: 1, Right: 2},
+					{Empty: true},
+					{Empty: true},
+				},
+			},
+			value: 9,
+			removed: &BTree{
+				Nodes: []BNode{
+					{Value: 8, Left: 1, Right: 2},
+					{Empty: true},
+					{Empty: true},
+				},
+			},
+			ok: false,
+		},
+		{
+			initial: &BTree{
+				Nodes: []BNode{
+					{Value: 8, Left: 1, Right: 2},
+					{Value: 1, Left: 3, Right: 4},
+					{Value: 9, Left: 5, Right: 6},
+					{Empty: true},
+					{Empty: true},
+					{Empty: true},
+					{Empty: true},
+				},
+			},
+			value: 8,
+			ok:    true,
+			removed: &BTree{
+				Nodes: []BNode{
+					{Value: 1, Left: 1, Right: 2},
+					{Value: 1, Left: 3, Right: 4, Empty: true},
+					{Value: 9, Left: 5, Right: 6},
+					{Empty: true},
+					{Empty: true},
+					{Empty: true},
+					{Empty: true},
+				},
+			},
+		},
+	}
+	for i, j := range ts {
+		ok := j.initial.Remove(j.value)
+		require.Equal(t, j.ok, ok, "At %d", i)
+		require.Equal(t, j.initial, j.removed, "At %d", i)
+	}
+}
