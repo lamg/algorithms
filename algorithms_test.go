@@ -51,7 +51,6 @@ func TestRunConcurrent(t *testing.T) {
 		func() (e error) {
 			for {
 			}
-			return
 		},
 		func() error { return fmt.Errorf(end) },
 	}

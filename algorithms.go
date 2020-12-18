@@ -86,3 +86,32 @@ func Reverse(fi func(int), n int) {
 		fi(n - i - 1)
 	}
 }
+
+// Int64SliceIntersection intersection between two slicess
+func Int64SliceIntersection(a, b []int64) (onlyInA, onlyInB,
+	intersection []int64) {
+	set := append(a, b...)
+	onlyInA, onlyInB, intersection =
+		make([]int64, 0, len(set)),
+		make([]int64, 0, len(set)),
+		make([]int64, 0, len(set))
+	for _, j := range set {
+		inA, inB := bln(j, a), bln(j, b)
+		switch {
+		case inA && inB:
+			intersection = append(intersection, j)
+		case inA:
+			onlyInA = append(onlyInA, j)
+		case inB:
+			onlyInB = append(onlyInB, j)
+		}
+	}
+	return
+}
+
+func bln(x int64, xs []int64) (ok bool) {
+	for i := 0; !ok && i != len(xs); i++ {
+		ok = xs[i] == x
+	}
+	return
+}

@@ -1,5 +1,6 @@
 package algorithms
 
+// Tree t
 type Tree struct {
 	Value int
 	Empty bool
@@ -7,6 +8,7 @@ type Tree struct {
 	Right *Tree
 }
 
+// Insert inserts
 func Insert(a *Tree, v int) {
 	if a.Empty {
 		a.Value = v
@@ -29,10 +31,12 @@ func Insert(a *Tree, v int) {
 	}
 }
 
+// Leaf leafs
 func Leaf(v int) *Tree {
 	return &Tree{Value: v, Empty: false}
 }
 
+// BNode bnodes
 type BNode struct {
 	Value int
 	Empty bool
@@ -40,14 +44,17 @@ type BNode struct {
 	Right uint
 }
 
+// BTree btrees
 type BTree struct {
 	Nodes []BNode
 }
 
+// NewBTree bebe
 func NewBTree() *BTree {
 	return &BTree{Nodes: []BNode{{Empty: true}}}
 }
 
+// Insert a
 func (b *BTree) Insert(v int) {
 	current := &b.Nodes[0]
 	for !current.Empty {
@@ -63,6 +70,7 @@ func (b *BTree) Insert(v int) {
 	b.Nodes = append(b.Nodes, BNode{Empty: true}, BNode{Empty: true})
 }
 
+// Remove r
 func (b *BTree) Remove(v int) (ok bool) {
 	current := &b.Nodes[0]
 	for !current.Empty && current.Value != v {
@@ -82,5 +90,18 @@ func (b *BTree) Remove(v int) (ok bool) {
 		current.Value = previous.Value
 		previous.Empty = true
 	}
+	return
+}
+
+// Postorder postorders
+type Postorder struct {
+	Tree     *BTree
+	Path     []int
+	PathProc []int
+	Current  int
+}
+
+// Next n
+func (p *Postorder) Next() (i int, def bool) {
 	return
 }
